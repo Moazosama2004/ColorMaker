@@ -6,6 +6,10 @@ A simple iOS app built with **UIKit** and **programmatic Auto Layout** that lets
 
 ColorMaker displays a bordered preview square in the center of the screen, with three labeled sliders (Red, Green, Blue) stacked above it. Dragging any slider updates the preview square's background color in real time by combining the current values of all three sliders.
 
+## Screenshots
+<img width="359" height="747" alt="image" src="https://github.com/user-attachments/assets/4bfd5fa4-5f78-4463-a612-150741888082" />
+
+
 ## Features
 
 - Pure UIKit, no Storyboard/XIB — all views are created and laid out in code

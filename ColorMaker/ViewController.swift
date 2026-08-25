@@ -11,13 +11,15 @@ class ViewController: UIViewController {
     
     var colorView: UIView!
     
-    var redControl: UISwitch!
-    var greenControl: UISwitch!
-    var blueControl: UISwitch!
+    var redControl: UISlider!
+    var greenControl: UISlider!
+    var blueControl: UISlider!
     
     var redControlLabel: UILabel!
     var greenControlLabel: UILabel!
     var blueControlLabel: UILabel!
+    
+    var sliderValue : Float = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +34,6 @@ class ViewController: UIViewController {
         colorView.translatesAutoresizingMaskIntoConstraints = false
         colorView.layer.borderWidth = 5
         colorView.layer.borderColor = UIColor.white.cgColor
-        
-        redControl = UISwitch()
         
         redControlLabel = UILabel()
         redControlLabel.text = "Red"
@@ -52,20 +52,23 @@ class ViewController: UIViewController {
         blueControlLabel.textColor = .blue
         blueControlLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        redControl = UISwitch()
+        redControl = UISlider()
+        redControl.minimumTrackTintColor = .gray
+        redControl.value = sliderValue
         redControl.translatesAutoresizingMaskIntoConstraints = false
-        redControl.tag = 0
         redControl.addTarget(self, action: #selector(changeValue(_:)), for: .valueChanged)
         
         
-        greenControl = UISwitch()
+        greenControl = UISlider()
+        greenControl.minimumTrackTintColor = .gray
+        greenControl.value = sliderValue
         greenControl.translatesAutoresizingMaskIntoConstraints = false
-        greenControl.tag = 1
         greenControl.addTarget(self, action: #selector(changeValue(_:)), for: .valueChanged)
         
-        blueControl = UISwitch()
+        blueControl = UISlider()
+        blueControl.minimumTrackTintColor = .gray
+        blueControl.value = sliderValue
         blueControl.translatesAutoresizingMaskIntoConstraints = false
-        blueControl.tag = 2
         blueControl.addTarget(self, action: #selector(changeValue(_:)), for: .valueChanged)
 
         view.addSubview(colorView)
@@ -81,6 +84,10 @@ class ViewController: UIViewController {
             colorView.heightAnchor.constraint(equalToConstant: 200),
             colorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             colorView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            redControl.widthAnchor.constraint(equalToConstant: 150),
+            greenControl.widthAnchor.constraint(equalTo: redControl.widthAnchor),
+            blueControl.widthAnchor.constraint(equalTo: redControl.widthAnchor),
          
             redControlLabel.bottomAnchor.constraint(equalTo: greenControlLabel.topAnchor, constant: -16),
             redControlLabel.leadingAnchor.constraint(equalTo: greenControlLabel.leadingAnchor),
@@ -98,17 +105,12 @@ class ViewController: UIViewController {
             greenControl.leadingAnchor.constraint(equalTo: blueControl.leadingAnchor),
             
             blueControl.topAnchor.constraint(equalTo: blueControlLabel.topAnchor),
-            blueControl.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 32),
+            blueControl.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 82),
         ])
     }
     
-    @objc func changeValue(_ sender: UISwitch) {
-        switch sender.tag {
-        case 0: colorView.backgroundColor = redControl.isOn ? .red : .clear
-        case 1: colorView.backgroundColor = greenControl.isOn ? .green : .clear
-        case 2: colorView.backgroundColor = blueControl.isOn ? .blue : .clear
-        default: break
-        }
+    @objc func changeValue(_ sender: UISlider) {
+        colorView.backgroundColor = UIColor(cgColor: CGColor(red: CGFloat(redControl.value), green: CGFloat(greenControl.value), blue: CGFloat(blueControl.value), alpha: 1))
     }
 }
 
